@@ -2,23 +2,33 @@ package died.guia06;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class AlumnoTest {
-
+	Alumno a;
+	Curso c;
+	
+	@BeforeEach
+	public void init() {
+		a = new Alumno("Juan",1234);
+		c = new Curso();
+	}
+	
 	@Test
 	void testCreditosObtenidos() {
-		fail("Not yet implemented");
+		int esperado = 0;
+		assertEquals(esperado,a.creditosObtenidos());
 	}
 
 	@Test
 	void testAprobar() {
-		fail("Not yet implemented");
+		a.aprobar(c);
 	}
 
 	@Test
 	void testInscripcionAceptada() {
-		fail("Not yet implemented");
+		a.inscripcionAceptada(c);
 	}
 
 }
