@@ -18,17 +18,31 @@ public class Alumno implements Comparable<Alumno>{
 		cursando = new ArrayList<Curso>();
 		aprobados = new ArrayList<Curso>();
 	}
+		
+	public Alumno(String nombre, Integer nroLibreta) {
+		this();
+		this.nombre = nombre;
+		this.nroLibreta = nroLibreta;
+	}
 
 	public int creditosObtenidos() {
-		return 1;
+		int creditos=0;
+		for(Curso c:aprobados) {
+			creditos = creditos + c.getCreditosRequeridos();
+		}
+		return creditos;
 	}
 
 	public void aprobar(Curso c) {
-		//
+		if(cursando.contains(c)) {
+			aprobados.add(c);
+			cursando.remove(c);
+		}
 	}
 
 	public void inscripcionAceptada(Curso c) {
-		//
+		if(!aprobados.contains(c))
+			cursando.add(c);
 	}
 	
 	public boolean equals(Alumno alumno) {
@@ -40,6 +54,8 @@ public class Alumno implements Comparable<Alumno>{
 		return this.getNombre().compareTo(alumno.getNombre());
 	}
 
+	//Getters and Setters
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -60,21 +76,8 @@ public class Alumno implements Comparable<Alumno>{
 		return cursando;
 	}
 
-	public void addCursando(Curso curso) {
-		if(!aprobados.contains(curso))
-			this.cursando.add(curso);
-	}
-
 	public List<Curso> getAprobados() {
 		return aprobados;
 	}
-
-	public void addAprobado(Curso curso) {
-		if(cursando.contains(curso)) {
-			this.cursando.remove(curso);
-		}
-		this.aprobados.add(curso);
-	}
-
 
 }
