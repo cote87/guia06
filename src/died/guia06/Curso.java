@@ -2,6 +2,9 @@ package died.guia06;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import died.guia06.util.Registro;
@@ -12,9 +15,10 @@ import died.guia06.util.Registro;
  * Un curso, al aprobarlo, otorga una cantidad de creditos definidas en el curso.
  * Un curso requiere que para inscribirnos tengamos al menos la cantidad de creditos requeridas, y que haya cupo disponible
  * @author marti
+ * @param <T>
  *
  */
-public class Curso {
+public class Curso<T>{
 
 	private Integer id;
 	private String nombre;
@@ -26,12 +30,21 @@ public class Curso {
 	
 	private Registro log;
 	
-	public Curso() {
+	private Curso() {
 		super();
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
+		this.creditosRequeridos= 0;
+		this.creditos = 0;
+	}	
+
+	public Curso(Integer id, String nombre, Integer cicloLectivo, Integer cupo) {
+		this();
+		this.id = id;
+		this.nombre = nombre;
+		this.cicloLectivo = cicloLectivo;
+		this.cupo = cupo;
 	}
-	
 
 	/**
 	 * Este mÃ©todo, verifica si el alumno se puede inscribir y si es asÃ­ lo agrega al curso,
@@ -48,6 +61,11 @@ public class Curso {
 	 */
 	public Boolean inscribir(Alumno a) {
 		try {
+			if(this.cumpleCondicionesDeInscripcion(a)) {
+				a.inscripcionAceptada(this);
+				inscriptos.add(a);
+				return true;
+			}
 			log.registrar(this, "inscribir ",a.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -56,21 +74,139 @@ public class Curso {
 	}
 	
 	
+	private boolean cumpleCondicionesDeInscripcion(Alumno a) {
+		if(this.cupo() && this.tieneCreditosMinimos(a) && !superaLimiteDeCicloLectivo(a)) {
+			return true;
+		}
+		else
+			return false;
+	}
+
+
+	private boolean tieneCreditosMinimos(Alumno a) {
+		if(a.creditosObtenidos() >= this.creditosRequeridos)
+			return true;
+		return false;
+	}
+
+
+	private boolean superaLimiteDeCicloLectivo(Alumno a) {
+		int coincidencias =0;
+		for(Curso c: a.getCursando()) {
+			if(c.getCicloLectivo() == this.cicloLectivo)
+				coincidencias++;
+		}
+		if(coincidencias >= 3)
+			return true;
+		return false;
+	}
+
+
+	private boolean cupo() {
+		if( inscriptos.size() < this.cupo)
+			return true;
+		return false;
+	}
+
+
 	/**
 	 * imprime los inscriptos en orden alfabetico
 	 */
 	public void imprimirInscriptos() {
 		try {
+			System.out.println("\nLista de alumnos");
+			Collections.sort(this.getInscriptos());
+			for(Alumno a: this.inscriptos) {
+				System.out.println(a.getNombre());
+			}
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void imprimirInscriptosPorLibreta() {
+		try {
+			System.out.println("\nLista de alumnos por libreta");
+			Collections.sort(this.getInscriptos(),new CompararAlumnosPorLibreta());
+			for(Alumno a: this.inscriptos) {
+				System.out.println(a.getNombre()+", Nº Libreta = "+a.getNroLibreta());
+			}
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void imprimirInscriptosPorCreditos() {
+		try {
+			System.out.println("\nLista de alumnos por créditos");
+			Collections.sort(this.getInscriptos(),new CompararAlumnosPorCreditos());
+			for(Alumno a: this.inscriptos) {
+				System.out.println(a.getNombre() +", Créditos = " +a.creditosObtenidos());
+			}
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//Getters y Setters
 
 	public int getCreditos() {
 		return this.creditos;
 	}
 
+	public Integer getCicloLectivo() {
+		return cicloLectivo;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Integer getCreditosRequeridos() {
+		return creditosRequeridos;
+	}
+
+	public void setCreditosRequeridos(Integer creditosRequeridos) {
+		if(creditosRequeridos >= 0)
+			this.creditosRequeridos = creditosRequeridos;
+	}
+
+	public Integer getCupo() {
+		return cupo;
+	}
+
+	public List<Alumno> getInscriptos() {
+		return inscriptos;
+	}
+
+	public Registro getLog() {
+		return log;
+	}
+
+	public void setCicloLectivo(Integer cicloLectivo) {
+		this.cicloLectivo = cicloLectivo;
+	}
+
+	public void setCreditos(Integer creditos) {
+		if(creditos >= 0)
+			this.creditos = creditos;
+	}	
 
 }

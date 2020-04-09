@@ -12,7 +12,7 @@ class AlumnoTest {
 	@BeforeEach
 	public void init() {
 		a = new Alumno("Juan",1234);
-		c = new Curso();
+		c = new Curso(1,"Matematicas",2,100);
 	}
 	
 	@Test

@@ -25,8 +25,8 @@ public class Alumno implements Comparable<Alumno>{
 		this.nroLibreta = nroLibreta;
 	}
 
-	public int creditosObtenidos() {
-		int creditos=0;
+	public Integer creditosObtenidos() {
+		Integer creditos=0;
 		for(Curso c:aprobados) {
 			creditos = creditos + c.getCreditos();
 		}
