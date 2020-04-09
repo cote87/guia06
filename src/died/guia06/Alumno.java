@@ -28,7 +28,7 @@ public class Alumno implements Comparable<Alumno>{
 	public int creditosObtenidos() {
 		int creditos=0;
 		for(Curso c:aprobados) {
-			creditos = creditos + c.getCreditosRequeridos();
+			creditos = creditos + c.getCreditos();
 		}
 		return creditos;
 	}

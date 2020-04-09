@@ -68,8 +68,8 @@ public class Curso {
 	}
 
 
-	public int getCreditosRequeridos() {
-		return this.creditosRequeridos;
+	public int getCreditos() {
+		return this.creditos;
 	}
 
 
