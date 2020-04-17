@@ -7,12 +7,14 @@ import org.junit.jupiter.api.Test;
 
 class AlumnoTest {
 	Alumno a;
-	Curso c;
+	Curso c1,c2;
 	
 	@BeforeEach
 	public void init() {
 		a = new Alumno("Juan",1234);
-		c = new Curso(1,"Matematicas",2,100);
+		c1 = new Curso(1,"Matematicas",2,100);
+		c2 = new Curso(2,"Lengua",1,50);
+		a.inscripcionAceptada(c1);
 	}
 	
 	@Test
@@ -23,12 +25,15 @@ class AlumnoTest {
 
 	@Test
 	void testAprobar() {
-		a.aprobar(c);
+		a.aprobar(c1);
+		assertFalse(a.getCursando().contains(c1));
+		assertTrue(a.getAprobados().contains(c1));
 	}
 
 	@Test
 	void testInscripcionAceptada() {
-		a.inscripcionAceptada(c);
+		a.inscripcionAceptada(c2);
+		assertTrue(a.getCursando().contains(c2));
 	}
 
 }

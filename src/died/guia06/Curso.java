@@ -2,8 +2,6 @@ package died.guia06;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,10 +13,9 @@ import died.guia06.util.Registro;
  * Un curso, al aprobarlo, otorga una cantidad de creditos definidas en el curso.
  * Un curso requiere que para inscribirnos tengamos al menos la cantidad de creditos requeridas, y que haya cupo disponible
  * @author marti
- * @param <T>
  *
  */
-public class Curso<T>{
+public class Curso{
 
 	private Integer id;
 	private String nombre;
@@ -62,7 +59,7 @@ public class Curso<T>{
 	public Boolean inscribir(Alumno a) {
 		try {
 			if(this.cumpleCondicionesDeInscripcion(a)) {
-				a.inscripcionAceptada(this);
+				a.inscripcionAceptada((Curso)this);
 				inscriptos.add(a);
 				return true;
 			}

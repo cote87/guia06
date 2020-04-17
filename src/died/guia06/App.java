@@ -16,6 +16,8 @@ public class App {
 		c1.inscribir(a3);
 		c1.setCreditos(10);
 		
+		System.out.println(c1.getClass() == Curso.class);
+		
 		c2= new Curso(1,"Lengua",2,100);
 		c2.inscribir(a1);
 		c2.inscribir(a2);
