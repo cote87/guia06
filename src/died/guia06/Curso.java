@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import died.guia06.exception.CupoMaximoException;
+import died.guia06.exception.CursoException;
+import died.guia06.exception.LimiteDeCicloLectivoException;
+import died.guia06.exception.NoTieneCreditosMinimosException;
+import died.guia06.exception.RegistroAuditoriaException;
 import died.guia06.util.Registro;
 
 /**
@@ -55,7 +60,29 @@ public class Curso{
 	 *      c) puede estar inscripto en simultáneo a no más de 3 cursos del mismo ciclo lectivo.
 	 * @param a
 	 * @return
+	 *
 	 */
+	public void inscribirAlumno(Alumno a) throws CursoException, RegistroAuditoriaException{
+		if(!tieneCreditosMinimos(a)) {
+			throw new NoTieneCreditosMinimosException(a.getNombre());
+		}
+		if(!cupo()) {
+			throw new CupoMaximoException();
+		}
+		if(superaLimiteDeCicloLectivo(a)) {
+			throw new LimiteDeCicloLectivoException(a.getNombre());
+		}
+		try {
+			if(this.cumpleCondicionesDeInscripcion(a)) {
+				a.inscripcionAceptada((Curso)this);
+				inscriptos.add(a);
+			}
+			log.registrar(this, "inscribir ",a.toString());
+		} catch (IOException e) {
+			throw new RegistroAuditoriaException();
+		}
+	}
+	
 	public Boolean inscribir(Alumno a) {
 		try {
 			if(this.cumpleCondicionesDeInscripcion(a)) {

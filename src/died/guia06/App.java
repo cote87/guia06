@@ -3,9 +3,12 @@ package died.guia06;
 import java.util.ArrayList;
 import java.util.List;
 
+import died.guia06.exception.CursoException;
+import died.guia06.exception.RegistroAuditoriaException;
+
 public class App {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CursoException, RegistroAuditoriaException {
 		
 		System.out.println("\nSITUACIÓN PRIMER CUATRIMESTRE\n");
 		
@@ -45,9 +48,9 @@ public class App {
 		};
 		
 		
-		//Se crean 3 cursos
+		//Se crean 5 cursos
 		//Para cursar Física se necesitan 15 puntos que solo lo puede dar Matemática.
-		Curso matematica,lengua,fisica,informatica;
+		Curso matematica,lengua,fisica,informatica,dibujo;
 		matematica= new Curso(1,"Matematicas",1,100);
 		matematica.setCreditos(15);
 		matematica.setCreditosRequeridos(0);
@@ -64,12 +67,20 @@ public class App {
 		informatica.setCreditos(3);
 		informatica.setCreditosRequeridos(0);
 		
+		dibujo= new Curso(5,"Dibujo",1,100);
+		dibujo.setCreditos(0);
+		dibujo.setCreditosRequeridos(0);
+		
 		//COMIENZA EL PRIMER CUATRIMESTRE		
 		//Se inscriben los 4 alumnos a Matemática, Informática y Lengua, materias que no poseen requisitos de créditos
-		matematica.inscribir(juan);
+		try {
+			matematica.inscribirAlumno(juan);
+		}catch(Exception e) {
+		}
 		matematica.inscribir(alejandro);
 		matematica.inscribir(luis1);
-		matematica.inscribir(luis2);
+		matematica.inscribir(luis2);	
+		
 		
 		lengua.inscribir(juan);
 		lengua.inscribir(alejandro);
@@ -81,10 +92,20 @@ public class App {
 		informatica.inscribir(luis1);
 		informatica.inscribir(luis2);
 		
+		//Esta inscripción no se va a llevar a cabo porque Juan ya se inscribió a 3 materias del mismo ciclo lectivo
+		dibujo.inscribir(juan);
+		try {
+			dibujo.inscribirAlumno(juan);
+		}
+		catch(Exception e) {
+			System.out.println("Continúa la ejecución de App...");
+		}
+		
 		matematica.imprimirInscriptos();
 		lengua.imprimirInscriptosPorCreditos();
 		fisica.imprimirInscriptos();
 		informatica.imprimirInscriptosPorLibreta();
+		dibujo.imprimirInscriptos();
 		
 		//FIN DEL PRIMER CUATRIMESTRE
 		
@@ -116,7 +137,5 @@ public class App {
 		
 		//IMPRIMO LA SITUACIÓN FINAL DE TODOS LOS ALUMNOS		
 		System.out.println(alumnosTotales);
-		
-
 	}
 }
