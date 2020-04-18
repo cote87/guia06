@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import died.guia06.exception.CursoException;
+import died.guia06.exception.RegistroAuditoriaException;
+
 class CursoTest {
 	
 	Curso curso,curso2;
@@ -36,6 +39,17 @@ class CursoTest {
 	void testInscribir() {
 		assertFalse(curso.inscribir(alumno));
 		assertTrue(curso2.inscribir(alumno));
+	}
+	
+	@Test
+	void testInscribirAlumno() throws CursoException, RegistroAuditoriaException {
+		try {
+			curso.inscribirAlumno(alumno);
+		}
+		catch(Exception e) {
+			System.out.println("El alumno "+alumno.getNombre()+" no se pudo inscribir");
+		}
+		curso2.inscribirAlumno(alumno);
 	}
 
 	@Test
