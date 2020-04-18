@@ -53,6 +53,12 @@ public class Alumno implements Comparable<Alumno>{
 	public int compareTo(Alumno alumno) {
 		return this.getNombre().compareTo(alumno.getNombre());
 	}
+	
+	@Override
+	public String toString() {
+		return "Nombre= "+this.nombre+" Nº de Libreta= "+this.getNroLibreta()+" Créditos= "+this.creditosObtenidos();
+		
+	}
 
 	//Getters and Setters
 	

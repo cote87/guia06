@@ -111,7 +111,7 @@ public class Curso{
 	 */
 	public void imprimirInscriptos() {
 		try {
-			System.out.println("\nLista de alumnos");
+			System.out.println("\nAsignatura:"+this.nombre+"\nLista de alumnos");
 			Collections.sort(this.getInscriptos());
 			for(Alumno a: this.inscriptos) {
 				System.out.println(a.getNombre());
@@ -124,10 +124,10 @@ public class Curso{
 	
 	public void imprimirInscriptosPorLibreta() {
 		try {
-			System.out.println("\nLista de alumnos por libreta");
+			System.out.println("\nAsignatura:"+this.nombre+"\nLista de alumnos por libreta");
 			Collections.sort(this.getInscriptos(),new CompararAlumnosPorLibreta());
 			for(Alumno a: this.inscriptos) {
-				System.out.println(a.getNombre()+", Nº Libreta = "+a.getNroLibreta());
+				System.out.println("Nº Libreta = "+a.getNroLibreta()+", Alumno= "+a.getNombre());
 			}
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		} catch (IOException e) {
@@ -138,10 +138,10 @@ public class Curso{
 	
 	public void imprimirInscriptosPorCreditos() {
 		try {
-			System.out.println("\nLista de alumnos por créditos");
+			System.out.println("\nAsignatura:"+this.nombre+"\nLista de alumnos por créditos");
 			Collections.sort(this.getInscriptos(),new CompararAlumnosPorCreditos());
 			for(Alumno a: this.inscriptos) {
-				System.out.println(a.getNombre() +", Créditos = " +a.creditosObtenidos());
+				System.out.println("Créditos = " +a.creditosObtenidos()+", Alumno= "+a.getNombre());
 			}
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		} catch (IOException e) {
