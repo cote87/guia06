@@ -76,24 +76,70 @@ public class App {
 		try {
 			matematica.inscribirAlumno(juan);
 		}catch(Exception e) {
+			System.out.println("El alumno "+juan.getNombre()+" no se pudo inscribir");
 		}
-		matematica.inscribir(alejandro);
-		matematica.inscribir(luis1);
-		matematica.inscribir(luis2);	
+		try {
+			matematica.inscribirAlumno(alejandro);
+		}catch(Exception e) {
+			System.out.println("El alumno "+alejandro.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			matematica.inscribirAlumno(luis1);
+		}catch(Exception e) {
+			System.out.println("El alumno "+luis1.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			matematica.inscribirAlumno(luis2);
+		}catch(Exception e) {
+			System.out.println("El alumno "+luis2.getNombre()+" no se pudo inscribir");
+		}
 		
 		
-		lengua.inscribir(juan);
-		lengua.inscribir(alejandro);
-		lengua.inscribir(luis1);
-		lengua.inscribir(luis2);
+		try {
+			lengua.inscribirAlumno(juan);
+		}catch(Exception e) {
+			System.out.println("El alumno "+juan.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			lengua.inscribirAlumno(alejandro);
+		}catch(Exception e) {
+			System.out.println("El alumno "+alejandro.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			lengua.inscribirAlumno(luis1);
+		}catch(Exception e) {
+			System.out.println("El alumno "+luis1.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			lengua.inscribirAlumno(luis2);
+		}catch(Exception e) {
+			System.out.println("El alumno "+luis2.getNombre()+" no se pudo inscribir");
+		}
 		
-		informatica.inscribir(juan);
-		informatica.inscribir(alejandro);
-		informatica.inscribir(luis1);
-		informatica.inscribir(luis2);
+		
+		try {
+			informatica.inscribirAlumno(juan);
+		}catch(Exception e) {
+			System.out.println("El alumno "+juan.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			informatica.inscribirAlumno(alejandro);
+		}catch(Exception e) {
+			System.out.println("El alumno "+alejandro.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			informatica.inscribirAlumno(luis1);
+		}catch(Exception e) {
+			System.out.println("El alumno "+luis1.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			informatica.inscribirAlumno(luis2);
+		}catch(Exception e) {
+			System.out.println("El alumno "+luis2.getNombre()+" no se pudo inscribir");
+		}
+		
 		
 		//Esta inscripción no se va a llevar a cabo porque Juan ya se inscribió a 3 materias del mismo ciclo lectivo
-		dibujo.inscribir(juan);
 		try {
 			dibujo.inscribirAlumno(juan);
 		}
@@ -124,12 +170,28 @@ public class App {
 		
 		//INICIO DEL SEGUNDO CUATRIMESTRE
 		System.out.println("\nSITUACIÓN INICIO SEGUNDO CUATRIMESTRE");
+		
 		//Todos los alumnos se intentan inscribir a Fisica, solo alejandro y juan cumplen con las condiciones
-		fisica.inscribir(juan);
-		fisica.inscribir(alejandro);
-		fisica.inscribir(luis1);
-		fisica.inscribir(luis2);
-		fisica.imprimirInscriptos();
+		try {
+			fisica.inscribirAlumno(juan);
+		}catch(Exception e) {
+			System.out.println("El alumno "+juan.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			fisica.inscribirAlumno(alejandro);
+		}catch(Exception e) {
+			System.out.println("El alumno "+alejandro.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			fisica.inscribirAlumno(luis1);
+		}catch(Exception e) {
+			System.out.println("El alumno "+luis1.getNombre()+" no se pudo inscribir");
+		}
+		try {
+			fisica.inscribirAlumno(luis2);
+		}catch(Exception e) {
+			System.out.println("El alumno "+luis2.getNombre()+" no se pudo inscribir");
+		}
 		
 		//FIN DEL SEGUNDO CUATRIMESTRE
 		luis1.aprobar(matematica);
